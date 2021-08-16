@@ -14,10 +14,19 @@ function renderLicenseSection(license) {}
 function generateMarkdown(data) {
   let toreturn =  `# ${data.Title}\n`;
   for (var key in data) {
-    if (key != 'Title' && data[key] != "") {
+    if (key != 'Title' && data[key] != "" && key != "Profile" && key != "Email") {
       toreturn = toreturn + `## ${key}\n${data[key]}\n`
     }
   }
+
+  if (data['Profile'] != "" || data['Email'] != "") {
+    toreturn = toreturn + `## Questions\n`;
+    data.Profile != "" ?  toreturn = toreturn + `Profile ${data['Profile']}\n` : "";
+    data.Email != "" ? toreturn = toreturn + `Email ${data['Email']}\n` : "";
+
+  }
+
+
   return toreturn;
   // for (let i = 1; i < NAMES.length; i++) {
   //   if (data[NAMES[i]] != "") {

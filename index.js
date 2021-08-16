@@ -57,6 +57,16 @@ function init() {
       type: 'input',
       message: QUESTIONS[6],
       name: NAMES[6],
+    }, 
+    {
+      type: 'input', 
+      message: "Email address",
+      name: "Email"
+    }, 
+    {
+      type: 'input', 
+      message: 'Github profile',
+      name: 'Profile'
     }
   ])
   .then((response) => {
