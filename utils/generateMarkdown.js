@@ -19,7 +19,10 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
+
+  license = license[0] ;
   if (license === "Apache" || license === "GNU" || license === "MIT") {
+    console.log("inside if statement");
     return `[![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})`;
   } 
   
@@ -41,9 +44,10 @@ function generateMarkdown(data) {
   let toc = "## Table of Contents\n";
   
   //add license if available
-  let licenseString = "## License\n";
+  let licenseString = "";
 
   if (data['License'] != "") {
+    licenseString = "## License\n";
     toc = toc + "[License](#license)\n\n";
     licenseString = licenseString + `This project is covered by the ${data.License} license\n\n`;
 
@@ -60,8 +64,6 @@ function generateMarkdown(data) {
       toc = toc + `[${key}](#${key.toLowerCase()})\n\n`
     }
   }
-
-
 
   //add Question section if either profile or email are provided. Add them to the file if they are present
   if (data['Profile'] != "" || data['Email'] != "") {

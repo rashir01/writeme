@@ -44,9 +44,10 @@ function init() {
       name: NAMES[3],
     },
     {
-      type: 'input',
+      type: 'checkbox',
       message: QUESTIONS[4],
       name: NAMES[4],
+      choices: ['Apache', 'MIT', 'GNU'],
     },
     {
       type: 'input',
