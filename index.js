@@ -5,9 +5,55 @@ const generateMarkdown = require('./utils/generateMarkdown')
 
 //Description,  Installation, Usage, License, Contributing, Tests, and Questions
 // TODO: Create an array of questions for user input
-const QUESTIONS = ["Project title:", "Project description:", "Installation instructions:", "Usage:", "Licence:", "Contributing:", "Tests:", "Quesionts:"];
-const NAMES = ["Title", "Description", "Installation", "Usage", "License", "Contributing", "Tests"];
-let values =  [];
+const QUESTIONS = [
+  {
+    type: 'input',
+    message: "Enter project title",
+    name: "Title",
+  },
+  {
+    type: 'input',
+    message: "Enter Project description",
+    name: "Description",
+  },
+  {
+    type: 'input',
+    message: "Installation instructions:",
+    name: "Installation",
+  },
+  {
+    type: 'input',
+    message: "Project Usage",
+    name: "Usage",
+  },
+  {
+    type: 'checkbox',
+    message: "Select License",
+    name: "License",
+    choices: ['Apache', 'MIT', 'GNU'],
+  },
+  {
+    type: 'input',
+    message: "How to contribute",
+    name: "Contributing",
+  },
+  {
+    type: 'input',
+    message: "How to test",
+    name: "Test",
+  }, 
+  {
+    type: 'input', 
+    message: "Email address",
+    name: "Email"
+  }, 
+  {
+    type: 'input', 
+    message: 'Github profile',
+    name: 'Profile'
+  }
+]
+
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
@@ -22,54 +68,7 @@ function writeToFile(fileName, data) {
 function init() {
   //console.log("init");
   inquirer
-  .prompt([
-    {
-      type: 'input',
-      message: QUESTIONS[0],
-      name: NAMES[0],
-    },
-    {
-      type: 'input',
-      message: QUESTIONS[1],
-      name: NAMES[1],
-    },
-    {
-      type: 'input',
-      message: QUESTIONS[2],
-      name: NAMES[2],
-    },
-    {
-      type: 'input',
-      message: QUESTIONS[3],
-      name: NAMES[3],
-    },
-    {
-      type: 'checkbox',
-      message: QUESTIONS[4],
-      name: NAMES[4],
-      choices: ['Apache', 'MIT', 'GNU'],
-    },
-    {
-      type: 'input',
-      message: QUESTIONS[5],
-      name: NAMES[5],
-    },
-    {
-      type: 'input',
-      message: QUESTIONS[6],
-      name: NAMES[6],
-    }, 
-    {
-      type: 'input', 
-      message: "Email address",
-      name: "Email"
-    }, 
-    {
-      type: 'input', 
-      message: 'Github profile',
-      name: 'Profile'
-    }
-  ])
+  .prompt(QUESTIONS)
   .then((response) => {
 
     Object.keys(response).forEach(key => {
