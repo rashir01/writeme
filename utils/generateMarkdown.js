@@ -12,22 +12,29 @@ function renderLicenseSection(license) {}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  let toreturn =  `# ${data.Title}\n`;
+  //add page title
+  let titleString =  `# ${data.Title}\n`;
+  //add TOC
+  let toc = "## Table of Contents\n";
+  //add body
+  let bodyString = "";
   for (var key in data) {
     if (key != 'Title' && data[key] != "" && key != "Profile" && key != "Email") {
-      toreturn = toreturn + `## ${key}\n${data[key]}\n`
+      bodyString = bodyString + `## ${key}\n${data[key]}\n`;
+      toc = toc + `[${key}](#${key.toLowerCase()})\n\n`
     }
   }
 
   if (data['Profile'] != "" || data['Email'] != "") {
-    toreturn = toreturn + `## Questions\n`;
-    data.Profile != "" ?  toreturn = toreturn + `Profile ${data['Profile']}\n` : "";
-    data.Email != "" ? toreturn = toreturn + `Email ${data['Email']}\n` : "";
+    bodyString = bodyString + `## Questions\n`;
+    toc = toc + "[Questions](#questions)\n";
+    data.Profile != "" ?  bodyString = bodyString + `Profile ${data['Profile']}\n\n` : "";
+    data.Email != "" ? bodyString = bodyString + `Email ${data['Email']}\n` : "";
 
   }
 
 
-  return toreturn;
+  return titleString + toc + bodyString;
   // for (let i = 1; i < NAMES.length; i++) {
   //   if (data[NAMES[i]] != "") {
   //     console.log(NAMES[i]+ ":" +data[NAMES[i]]);
