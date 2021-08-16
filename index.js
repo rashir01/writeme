@@ -1,6 +1,8 @@
 // Use inquirer package to get user input
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown')
+
 //Description,  Installation, Usage, License, Contributing, Tests, and Questions
 // TODO: Create an array of questions for user input
 const QUESTIONS = ["Project title:", "Project description:", "Installation instructions:", "Usage:", "Licence:", "Contributing:", "Tests:", "Quesionts:"];
@@ -9,28 +11,11 @@ let values =  [];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  
-  //console.log("data " +data);
-  //console.log("keys " + dataKeys);
-  //console.log("values " + dataValues);
-  //console.log("value of key Title " + data[names[0]])
-  fs.writeFileSync(fileName, `# ${data[NAMES[0]]}\n\n`, (err) => err ? console.log(err) : console.log('File written!'));
 
-  for (let i = 1; i < NAMES.length; i++) {
-    if (data[NAMES[i]] != "") {
-      console.log(NAMES[i]+ ":" +data[NAMES[i]]);
-      fs.appendFileSync('README.md', `## ${NAMES[i]}\n\n`, (err) => err ? console.log(err) : console.log('worte' + NAMES[i]));
-      fs.appendFileSync(fileName, `${data[NAMES[i]]}\n`, (err) => err ? console.log(err) : console.log('worte' + NAMES[i]))
-    }
-  }
-  // fs.writeFile('README.md', `# ${data[names[0]]}\n\n`, (err) => err ? console.log(err) : console.log('File written!'));
-  // for (let i = 1; i < names.length; i++) {
-  //    if (data[names[i]] != "") {
-  //      fs.appendFile('README.md', `## ${names[i]}\n\n${data[names[i]]}\n`, (err) => err ? console.log(err) : console.log(`just wrote ${names[i]}\n\n${data[names[i]]}\n`));
-  //    }
-  //  }
-    
-  //fs.writeFile('README.md', data.title, (err) => err ? console.log(err) : console.log('File written!'));
+  fs.writeFileSync(fileName, data, (err) => err ? console.log(err) : console.log('File written!'));
+
+
+
 }
 
 // TODO: Create a function to initialize app
@@ -75,9 +60,14 @@ function init() {
     }
   ])
   .then((response) => {
-    values = response;
+
+    Object.keys(response).forEach(key => {
+      console.log(key, response[key]);
+    });
+
+    let stringToWrite = generateMarkdown(response);
     //console.log(response);
-    writeToFile("README.md", response);
+    writeToFile("README.md", stringToWrite);
   });
 }
 
