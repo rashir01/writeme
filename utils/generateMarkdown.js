@@ -69,7 +69,7 @@ function generateMarkdown(data) {
   if (data['Profile'] != "" || data['Email'] != "") {
     bodyString = bodyString + `## Questions\n`;
     toc = toc + "[Questions](#questions)\n";
-    data.Profile != "" ?  bodyString = bodyString + `[Github Profile](https://github.com/${data['Profile']})\n\n` : "";
+    data.Profile != "" ?  bodyString = bodyString + `[Github ${data['Profile']}](https://github.com/${data['Profile']})\n\n` : "";
     data.Email != "" ? bodyString = bodyString + `Email: ${data['Email']}\n` : "";
   }
   return titleString + toc + licenseString + bodyString;
