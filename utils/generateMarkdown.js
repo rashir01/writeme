@@ -32,7 +32,6 @@ function renderLicenseLink(license) {
 */
 function renderLicenseSection(license) {
   if (license === "Apache" || license === "GNU" || license === "MIT") {
-    console.log("inside if statement");
     return `[![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})`;
   } 
   return "";
