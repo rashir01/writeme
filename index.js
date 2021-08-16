@@ -53,7 +53,6 @@ const QUESTIONS = [
   }
 ]
 
-
 /*
   function writeToFile
   purpose: write a given string to a file. File created if it doesnt exist and rewritten if it exists
