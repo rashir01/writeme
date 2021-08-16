@@ -99,6 +99,5 @@ WHEN I enter my GitHub username
 THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
 
 
-WHEN I click on the links in the Table of Contents
-THEN I am taken to the corresponding section of the README
+
 */
