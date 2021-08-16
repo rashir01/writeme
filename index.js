@@ -1,10 +1,9 @@
-// Use inquirer package to get user input
+// Use inquirer package to get user input, fs for file operations, and generateMarkdown for markdown genration
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown')
 
-//Description,  Installation, Usage, License, Contributing, Tests, and Questions
-// TODO: Create an array of questions for user input
+// array of questions for user input
 const QUESTIONS = [
   {
     type: 'input',
@@ -55,48 +54,30 @@ const QUESTIONS = [
 ]
 
 
-// TODO: Create a function to write README file
+/*
+  function writeToFile
+  purpose: write a given string to a file. File created if it doesnt exist and rewritten if it exists
+  input:  fileName - string specifying the file name
+          data - string data to be written to the file
+  return: none
+*/
 function writeToFile(fileName, data) {
-
   fs.writeFileSync(fileName, data, (err) => err ? console.log(err) : console.log('File written!'));
-
-
-
 }
 
-// TODO: Create a function to initialize app
+/*
+  function init
+  purpose: initialize the app and prompt the user for input. inputs used to generate the resulting README file
+  input: none
+  return: none
+*/
 function init() {
-  //console.log("init");
   inquirer
   .prompt(QUESTIONS)
   .then((response) => {
-
-    Object.keys(response).forEach(key => {
-      console.log(key, response[key]);
-    });
-
     let stringToWrite = generateMarkdown(response);
-    //console.log(response);
     writeToFile("README.md", stringToWrite);
   });
 }
 
 init();
-
-
-/*
-
-
-
-
-
-
-
-
-
-WHEN I enter my GitHub username
-THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-
-
-
-*/
