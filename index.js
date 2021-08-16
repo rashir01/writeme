@@ -1,58 +1,83 @@
 // Use inquirer package to get user input
 const inquirer = require('inquirer');
+const fs = require('fs');
 //Description,  Installation, Usage, License, Contributing, Tests, and Questions
 // TODO: Create an array of questions for user input
-const questions = ["Project title:", "Project description:", "Installation instructions:", "Usage:", "Licence:", "Contributing:", "Tests:", "Quesionts:"];
-const names = ["title", "description", "installation", "usage", "licence", "contributing", "tests", "questions"];
+const QUESTIONS = ["Project title:", "Project description:", "Installation instructions:", "Usage:", "Licence:", "Contributing:", "Tests:", "Quesionts:"];
+const NAMES = ["Title", "Description", "Installation", "Usage", "License", "Contributing", "Tests"];
 let values =  [];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  
+  //console.log("data " +data);
+  //console.log("keys " + dataKeys);
+  //console.log("values " + dataValues);
+  //console.log("value of key Title " + data[names[0]])
+  fs.writeFileSync(fileName, `# ${data[NAMES[0]]}\n\n`, (err) => err ? console.log(err) : console.log('File written!'));
+
+  for (let i = 1; i < NAMES.length; i++) {
+    if (data[NAMES[i]] != "") {
+      console.log(NAMES[i]+ ":" +data[NAMES[i]]);
+      fs.appendFileSync('README.md', `## ${NAMES[i]}\n\n`, (err) => err ? console.log(err) : console.log('worte' + NAMES[i]));
+      fs.appendFileSync(fileName, `${data[NAMES[i]]}\n`, (err) => err ? console.log(err) : console.log('worte' + NAMES[i]))
+    }
+  }
+  // fs.writeFile('README.md', `# ${data[names[0]]}\n\n`, (err) => err ? console.log(err) : console.log('File written!'));
+  // for (let i = 1; i < names.length; i++) {
+  //    if (data[names[i]] != "") {
+  //      fs.appendFile('README.md', `## ${names[i]}\n\n${data[names[i]]}\n`, (err) => err ? console.log(err) : console.log(`just wrote ${names[i]}\n\n${data[names[i]]}\n`));
+  //    }
+  //  }
+    
+  //fs.writeFile('README.md', data.title, (err) => err ? console.log(err) : console.log('File written!'));
+}
 
 // TODO: Create a function to initialize app
 function init() {
-  console.log("init");
+  //console.log("init");
   inquirer
   .prompt([
     {
       type: 'input',
-      message: questions[0],
-      name: names[0],
+      message: QUESTIONS[0],
+      name: NAMES[0],
     },
     {
       type: 'input',
-      message: questions[1],
-      name: names[1],
+      message: QUESTIONS[1],
+      name: NAMES[1],
     },
     {
       type: 'input',
-      message: questions[2],
-      name: names[2],
+      message: QUESTIONS[2],
+      name: NAMES[2],
     },
     {
       type: 'input',
-      message: questions[3],
-      name: names[3],
+      message: QUESTIONS[3],
+      name: NAMES[3],
     },
     {
       type: 'input',
-      message: questions[4],
-      name: names[4],
+      message: QUESTIONS[4],
+      name: NAMES[4],
     },
     {
       type: 'input',
-      message: questions[5],
-      name: names[5],
+      message: QUESTIONS[5],
+      name: NAMES[5],
     },
     {
       type: 'input',
-      message: questions[6],
-      name: names[6],
+      message: QUESTIONS[6],
+      name: NAMES[6],
     }
   ])
   .then((response) => {
-      values = JSON.stringify(response);
-
+    values = response;
+    //console.log(response);
+    writeToFile("README.md", response);
   });
 }
 
