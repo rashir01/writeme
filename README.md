@@ -27,6 +27,7 @@ to install the program use "npm i"
 To run use "node index.js"
 ## Usage
 To run use "node index.js" and follwo the prompts. If there is a section that is not needed, press enter to omit
+![How to use](./assets/images/usage.gif)
 ## Test
 Tests were run manualy. 
 ## Questions
